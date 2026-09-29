@@ -1,0 +1,163 @@
+```html
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Yum Bot – In Entwicklung</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #0f1117;
+      color: white;
+      overflow: hidden;
+    }
+
+    .background {
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 20%, rgba(255, 170, 0, 0.15), transparent 30%),
+        radial-gradient(circle at 80% 80%, rgba(255, 90, 0, 0.12), transparent 30%);
+      z-index: -1;
+    }
+
+    .card {
+      width: min(90%, 650px);
+      padding: 60px 40px;
+      text-align: center;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 24px;
+      background: rgba(25, 28, 38, 0.8);
+      backdrop-filter: blur(15px);
+      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
+    }
+
+    .logo {
+      font-size: 70px;
+      margin-bottom: 15px;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 15px;
+      background: linear-gradient(90deg, #ffb300, #ff6a00);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .subtitle {
+      font-size: 24px;
+      font-weight: 600;
+      margin-bottom: 18px;
+    }
+
+    p {
+      color: #aeb4c2;
+      font-size: 17px;
+      line-height: 1.6;
+      margin-bottom: 30px;
+    }
+
+    .status {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      border-radius: 999px;
+      background: rgba(255, 179, 0, 0.1);
+      border: 1px solid rgba(255, 179, 0, 0.25);
+      color: #ffb300;
+      font-weight: bold;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      background: #ffb300;
+      border-radius: 50%;
+      animation: pulse 1.5s infinite;
+    }
+
+    footer {
+      margin-top: 35px;
+      color: #626978;
+      font-size: 13px;
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 0.4;
+        transform: scale(0.8);
+      }
+    }
+
+    @media (max-width: 500px) {
+      .card {
+        padding: 45px 25px;
+      }
+
+      h1 {
+        font-size: 38px;
+      }
+
+      .subtitle {
+        font-size: 20px;
+      }
+
+      .logo {
+        font-size: 55px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="background"></div>
+
+  <main class="card">
+    <div class="logo">🍔</div>
+
+    <h1>Yum Bot</h1>
+
+    <div class="subtitle">
+      In Entwicklung
+    </div>
+
+    <p>
+      Yum Bot befindet sich momentan in der Entwicklung.
+      Wir arbeiten fleißig daran, etwas Leckeres für euch zu bauen.
+      Schau bald wieder vorbei!
+    </p>
+
+    <div class="status">
+      <span class="dot"></span>
+      Entwicklung läuft
+    </div>
+
+    <footer>
+      © 2026 Yum Bot
+    </footer>
+  </main>
+
+</body>
+</html>
+```
