@@ -1,142 +1,366 @@
-```html
 <!DOCTYPE html>
 <html lang="de">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yum Bot – In Entwicklung</title>
 
-  <title>Yum Bot – In Entwicklung</title>
+<style>
+:root{
+  --bg:#0f1117;
+  --card:#191c26;
+  --muted:#aeb4c2;
+  --accent:#ff9d00;
+  --accent2:#ff6500;
+  --border:#2a2f3c;
+}
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    body {
-      min-height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      font-family: Arial, Helvetica, sans-serif;
-      background: #0f1117;
-      color: white;
-      overflow: hidden;
-    }
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:Inter,system-ui,Arial,sans-serif;
+  background:
+    radial-gradient(circle at 15% 20%,#ff9d0020,transparent 30%),
+    radial-gradient(circle at 85% 80%,#ff650018,transparent 30%),
+    var(--bg);
+  color:#fff;
+}
 
-    .background {
-      position: fixed;
-      inset: 0;
-      background:
-        radial-gradient(circle at 20% 20%, rgba(255, 170, 0, 0.15), transparent 30%),
-        radial-gradient(circle at 80% 80%, rgba(255, 90, 0, 0.12), transparent 30%);
-      z-index: -1;
-    }
+/* STARTSEITE */
 
-    .card {
-      width: min(90%, 650px);
-      padding: 60px 40px;
-      text-align: center;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 24px;
-      background: rgba(25, 28, 38, 0.8);
-      backdrop-filter: blur(15px);
-      box-shadow: 0 25px 80px rgba(0, 0, 0, 0.4);
-    }
+main{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
 
-    .logo {
-      font-size: 70px;
-      margin-bottom: 15px;
-    }
+.card{
+  width:min(680px,100%);
+  padding:64px 36px;
+  text-align:center;
+  background:#191c26dd;
+  border:1px solid var(--border);
+  border-radius:28px;
+  box-shadow:0 25px 80px #0008;
+  backdrop-filter:blur(15px);
+}
 
-    h1 {
-      font-size: 48px;
-      margin-bottom: 15px;
-      background: linear-gradient(90deg, #ffb300, #ff6a00);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
+.logo{
+  font-size:72px;
+}
 
-    .subtitle {
-      font-size: 24px;
-      font-weight: 600;
-      margin-bottom: 18px;
-    }
+h1{
+  font-size:50px;
+  margin:10px 0;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  -webkit-background-clip:text;
+  color:transparent;
+}
 
-    p {
-      color: #aeb4c2;
-      font-size: 17px;
-      line-height: 1.6;
-      margin-bottom: 30px;
-    }
+.subtitle{
+  font-size:24px;
+  font-weight:700;
+}
 
-    .status {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 20px;
-      border-radius: 999px;
-      background: rgba(255, 179, 0, 0.1);
-      border: 1px solid rgba(255, 179, 0, 0.25);
-      color: #ffb300;
-      font-weight: bold;
-    }
+p{
+  color:var(--muted);
+  line-height:1.6;
+  font-size:17px;
+}
 
-    .dot {
-      width: 10px;
-      height: 10px;
-      background: #ffb300;
-      border-radius: 50%;
-      animation: pulse 1.5s infinite;
-    }
+.status{
+  display:inline-flex;
+  gap:9px;
+  align-items:center;
+  padding:11px 18px;
+  border:1px solid #ff9d0040;
+  background:#ff9d0015;
+  color:#ffb52e;
+  border-radius:999px;
+  font-weight:700;
+}
 
-    footer {
-      margin-top: 35px;
-      color: #626978;
-      font-size: 13px;
-    }
+.dot{
+  width:9px;
+  height:9px;
+  background:#ffb52e;
+  border-radius:50%;
+  animation:pulse 1.5s infinite;
+}
 
-    @keyframes pulse {
-      0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-      }
+/* TEAM LOGIN BUTTON */
 
-      50% {
-        opacity: 0.4;
-        transform: scale(0.8);
-      }
-    }
+.team-login{
+  position:fixed;
+  right:18px;
+  bottom:16px;
+  border:0;
+  background:#fff;
+  color:#111;
+  padding:10px 15px;
+  border-radius:12px;
+  font-weight:700;
+  cursor:pointer;
+  box-shadow:0 8px 25px #0005;
+}
 
-    @media (max-width: 500px) {
-      .card {
-        padding: 45px 25px;
-      }
+.team-login:hover{
+  transform:translateY(-1px);
+}
 
-      h1 {
-        font-size: 38px;
-      }
+/* LOGIN */
 
-      .subtitle {
-        font-size: 20px;
-      }
+.overlay{
+  position:fixed;
+  inset:0;
+  background:#0009;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+  z-index:10;
+}
 
-      .logo {
-        font-size: 55px;
-      }
-    }
-  </style>
+.modal{
+  width:min(430px,100%);
+  background:#191c26;
+  border:1px solid var(--border);
+  border-radius:22px;
+  padding:28px;
+  box-shadow:0 30px 100px #0009;
+}
+
+.modal h2{
+  margin-top:0;
+}
+
+.close{
+  float:right;
+  background:none;
+  border:0;
+  color:#aaa;
+  font-size:24px;
+  cursor:pointer;
+}
+
+.input{
+  width:100%;
+  padding:13px;
+  margin:7px 0 12px;
+  border-radius:10px;
+  border:1px solid var(--border);
+  background:#0f1117;
+  color:white;
+  font-size:15px;
+}
+
+.btn{
+  width:100%;
+  padding:12px;
+  border:0;
+  border-radius:10px;
+  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  font-weight:800;
+  cursor:pointer;
+}
+
+.error{
+  color:#ff8585;
+  min-height:20px;
+  font-size:14px;
+}
+
+.hint{
+  font-size:12px;
+  color:#747c8d;
+  margin-top:15px;
+}
+
+/* DASHBOARD */
+
+.dashboard{
+  display:none;
+  position:fixed;
+  inset:0;
+  overflow:auto;
+  background:var(--bg);
+  z-index:20;
+  padding:24px;
+}
+
+.dash-wrap{
+  max-width:1200px;
+  margin:auto;
+}
+
+.top{
+  display:flex;
+  justify-content:space-between;
+  gap:15px;
+  align-items:center;
+  flex-wrap:wrap;
+}
+
+.top h1{
+  font-size:34px;
+  margin:0;
+}
+
+.logout{
+  background:#252a35;
+  color:#fff;
+  border:1px solid var(--border);
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
+  gap:14px;
+  margin:24px 0;
+}
+
+.stat{
+  background:#191c26;
+  border:1px solid var(--border);
+  padding:20px;
+  border-radius:16px;
+}
+
+.stat small{
+  color:var(--muted);
+}
+
+.stat b{
+  display:block;
+  font-size:30px;
+  margin-top:7px;
+}
+
+.panel{
+  background:#191c26;
+  border:1px solid var(--border);
+  border-radius:16px;
+  padding:20px;
+  margin:14px 0;
+}
+
+.panel h3{
+  margin-top:0;
+}
+
+.row{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin-bottom:10px;
+}
+
+.row .input{
+  margin:0;
+  flex:1;
+  min-width:150px;
+}
+
+.secondary{
+  background:#252a35;
+  color:#fff;
+  border:1px solid var(--border);
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.danger{
+  background:#3a2024;
+  color:#ff9b9b;
+  border:1px solid #6b2c33;
+  padding:10px 14px;
+  border-radius:10px;
+  cursor:pointer;
+}
+
+.user{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  border-top:1px solid var(--border);
+  padding:12px 0;
+  gap:10px;
+}
+
+.user:first-of-type{
+  border-top:0;
+}
+
+.badge{
+  padding:4px 8px;
+  border-radius:999px;
+  background:#ffffff12;
+  color:#ffbd52;
+  font-size:12px;
+}
+
+.notice{
+  font-size:13px;
+  color:#aeb4c2;
+  background:#10131a;
+  border:1px solid var(--border);
+  padding:12px;
+  border-radius:10px;
+}
+
+.locked{
+  opacity:.55;
+}
+
+@keyframes pulse{
+  50%{
+    opacity:.4;
+    transform:scale(.8);
+  }
+}
+
+@media(max-width:520px){
+
+  .card{
+    padding:45px 22px;
+  }
+
+  h1{
+    font-size:40px;
+  }
+
+  .logo{
+    font-size:58px;
+  }
+}
+</style>
 </head>
+
 
 <body>
 
-  <div class="background"></div>
+<!-- STARTSEITE -->
 
-  <main class="card">
-    <div class="logo">🍔</div>
+<main id="landing">
 
-    <h1>Yum Bot</h1>
+  <section class="card">
+
+    <div class="logo">
+      🍔
+    </div>
+
+    <h1>
+      Yum Bot
+    </h1>
 
     <div class="subtitle">
       In Entwicklung
@@ -144,8 +368,7 @@
 
     <p>
       Yum Bot befindet sich momentan in der Entwicklung.
-      Wir arbeiten fleißig daran, etwas Leckeres für euch zu bauen.
-      Schau bald wieder vorbei!
+      Wir arbeiten daran, etwas Leckeres für euch zu bauen.
     </p>
 
     <div class="status">
@@ -153,11 +376,1207 @@
       Entwicklung läuft
     </div>
 
-    <footer>
-      © 2026 Yum Bot
-    </footer>
-  </main>
+  </section>
+
+</main>
+
+
+<!-- TEAM LOGIN BUTTON -->
+
+<button
+  class="team-login"
+  onclick="openLogin()">
+
+  Team Login
+
+</button>
+
+
+<!-- LOGIN FENSTER -->
+
+<div
+  class="overlay"
+  id="loginOverlay">
+
+  <div class="modal">
+
+    <button
+      class="close"
+      onclick="closeLogin()">
+
+      ×
+
+    </button>
+
+    <h2>
+      Team Login
+    </h2>
+
+    <p>
+      Nur für Mitglieder des Yum-Bot-Teams.
+    </p>
+
+    <input
+      class="input"
+      id="loginUser"
+      placeholder="Benutzername"
+      autocomplete="username">
+
+    <input
+      class="input"
+      id="loginPass"
+      type="password"
+      placeholder="Passwort"
+      autocomplete="current-password">
+
+    <div
+      class="error"
+      id="loginError">
+    </div>
+
+    <button
+      class="btn"
+      onclick="login()">
+
+      Anmelden
+
+    </button>
+
+    <div class="hint">
+
+      Demo-Zugang:
+      owner / yumdemo
+
+    </div>
+
+  </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<section
+  class="dashboard"
+  id="dashboard">
+
+  <div class="dash-wrap">
+
+
+    <!-- HEADER -->
+
+    <div class="top">
+
+      <h1>
+        🍔 Yum Bot Team
+      </h1>
+
+      <button
+        class="logout"
+        onclick="logout()">
+
+        Abmelden
+
+      </button>
+
+    </div>
+
+
+    <div
+      id="welcome"
+      class="notice"
+      style="margin-top:18px">
+    </div>
+
+
+    <!-- STATISTIKEN -->
+
+    <div class="grid">
+
+      <div class="stat">
+
+        <small>
+          Statistiken
+        </small>
+
+        <b id="sStats">
+          1
+        </b>
+
+      </div>
+
+
+      <div class="stat">
+
+        <small>
+          Benutzer
+        </small>
+
+        <b id="sUsers">
+          0
+        </b>
+
+      </div>
+
+
+      <div class="stat">
+
+        <small>
+          Seasons
+        </small>
+
+        <b id="sSeasons">
+          1
+        </b>
+
+      </div>
+
+
+      <div class="stat">
+
+        <small>
+          Gruppen
+        </small>
+
+        <b id="sGroups">
+          0
+        </b>
+
+      </div>
+
+
+      <div class="stat">
+
+        <small>
+          Online
+        </small>
+
+        <b id="sOnline">
+          1
+        </b>
+
+      </div>
+
+
+      <div class="stat">
+
+        <small>
+          Registriert
+        </small>
+
+        <b id="sRegistered">
+          0
+        </b>
+
+      </div>
+
+    </div>
+
+
+    <!-- STATISTIKEN BEARBEITEN -->
+
+    <div
+      class="panel"
+      id="statsPanel">
+
+      <h3>
+        Website-Statistiken
+      </h3>
+
+      <div class="row">
+
+        <input
+          class="input"
+          id="groupsInput"
+          type="number"
+          min="0"
+          placeholder="Gruppen">
+
+        <input
+          class="input"
+          id="seasonsInput"
+          type="number"
+          min="0"
+          placeholder="Seasons">
+
+        <input
+          class="input"
+          id="onlineInput"
+          type="number"
+          min="0"
+          placeholder="Online">
+
+        <input
+          class="input"
+          id="registeredInput"
+          type="number"
+          min="0"
+          placeholder="Registriert">
+
+        <button
+          class="secondary"
+          onclick="saveStats()">
+
+          Speichern
+
+        </button>
+
+      </div>
+
+    </div>
+
+
+    <!-- ACCOUNTS -->
+
+    <div
+      class="panel"
+      id="accountsPanel">
+
+      <h3>
+        Team-Accounts
+      </h3>
+
+      <div class="notice">
+
+        Owner kann Accounts und Rollen verwalten.
+        Manager kann Inhalte bearbeiten.
+        Supporter kann Gruppen verwalten.
+
+      </div>
+
+
+      <div
+        class="row"
+        style="margin-top:12px">
+
+        <input
+          class="input"
+          id="newUser"
+          placeholder="Benutzername">
+
+        <input
+          class="input"
+          id="newPass"
+          type="password"
+          placeholder="Passwort">
+
+
+        <select
+          class="input"
+          id="newRole">
+
+          <option>
+            Supporter
+          </option>
+
+          <option>
+            Manager
+          </option>
+
+          <option>
+            Owner
+          </option>
+
+        </select>
+
+
+        <button
+          class="secondary"
+          onclick="addUser()">
+
+          Account hinzufügen
+
+        </button>
+
+      </div>
+
+
+      <div id="userList">
+      </div>
+
+    </div>
+
+
+    <!-- GRUPPEN -->
+
+    <div
+      class="panel"
+      id="groupsPanel">
+
+      <h3>
+        Gruppen
+      </h3>
+
+      <div class="row">
+
+        <input
+          class="input"
+          id="groupName"
+          placeholder="Neue Gruppe">
+
+        <button
+          class="secondary"
+          onclick="addGroup()">
+
+          Gruppe hinzufügen
+
+        </button>
+
+      </div>
+
+
+      <div id="groupList">
+      </div>
+
+    </div>
+
+
+    <!-- ROLLEN -->
+
+    <div class="panel">
+
+      <h3>
+        Rollen & Rechte
+      </h3>
+
+      <div class="notice">
+
+        <b>Owner</b>
+        – Accounts, Rollen und alle Inhalte
+
+        <br><br>
+
+        <b>Manager</b>
+        – Inhalte, Statistiken und Gruppen
+
+        <br><br>
+
+        <b>Supporter</b>
+        – Gruppen und ausgewählte Inhalte
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+<script>
+
+/*
+====================================================
+YUM BOT
+TEAM SYSTEM
+====================================================
+*/
+
+
+/* DEMO ACCOUNTS */
+
+const DEFAULT_USERS = [
+
+  {
+    username:"owner",
+    password:"yumdemo",
+    role:"Owner"
+  },
+
+  {
+    username:"manager",
+    password:"managerdemo",
+    role:"Manager"
+  },
+
+  {
+    username:"supporter",
+    password:"supporterdemo",
+    role:"Supporter"
+  }
+
+];
+
+
+let users =
+  JSON.parse(
+    localStorage.getItem("yum_users") || "null"
+  )
+  || DEFAULT_USERS;
+
+
+let data =
+  JSON.parse(
+    localStorage.getItem("yum_data") || "null"
+  )
+  || {
+
+    groups:0,
+
+    seasons:1,
+
+    online:1,
+
+    registered:0,
+
+    groupNames:[]
+
+  };
+
+
+let current = null;
+
+
+/* SPEICHERN */
+
+function save(){
+
+  localStorage.setItem(
+    "yum_users",
+    JSON.stringify(users)
+  );
+
+  localStorage.setItem(
+    "yum_data",
+    JSON.stringify(data)
+  );
+
+}
+
+
+/* LOGIN ÖFFNEN */
+
+function openLogin(){
+
+  document.getElementById(
+    "loginOverlay"
+  ).style.display="flex";
+
+  document.getElementById(
+    "loginUser"
+  ).focus();
+
+}
+
+
+/* LOGIN SCHLIESSEN */
+
+function closeLogin(){
+
+  document.getElementById(
+    "loginOverlay"
+  ).style.display="none";
+
+  document.getElementById(
+    "loginError"
+  ).textContent="";
+
+}
+
+
+/* LOGIN */
+
+function login(){
+
+  const username =
+    document
+      .getElementById("loginUser")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("loginPass")
+      .value;
+
+
+  const found =
+    users.find(
+      user =>
+        user.username === username &&
+        user.password === password
+    );
+
+
+  if(!found){
+
+    document.getElementById(
+      "loginError"
+    ).textContent =
+      "Benutzername oder Passwort ist falsch.";
+
+    return;
+
+  }
+
+
+  current = found;
+
+  closeLogin();
+
+
+  document.getElementById(
+    "landing"
+  ).style.display="none";
+
+
+  document.querySelector(
+    ".team-login"
+  ).style.display="none";
+
+
+  document.getElementById(
+    "dashboard"
+  ).style.display="block";
+
+
+  render();
+
+}
+
+
+/* LOGOUT */
+
+function logout(){
+
+  current=null;
+
+
+  document.getElementById(
+    "dashboard"
+  ).style.display="none";
+
+
+  document.getElementById(
+    "landing"
+  ).style.display="grid";
+
+
+  document.querySelector(
+    ".team-login"
+  ).style.display="block";
+
+}
+
+
+/* RECHTE */
+
+function can(permission){
+
+  if(!current){
+    return false;
+  }
+
+
+  /* OWNER */
+
+  if(current.role==="Owner"){
+    return true;
+  }
+
+
+  /* MANAGER */
+
+  if(
+    current.role==="Manager" &&
+    permission!=="owner"
+  ){
+
+    return true;
+
+  }
+
+
+  /* SUPPORTER */
+
+  if(
+    current.role==="Supporter" &&
+    permission==="groups"
+  ){
+
+    return true;
+
+  }
+
+
+  return false;
+
+}
+
+
+/* DASHBOARD RENDERN */
+
+function render(){
+
+  document.getElementById(
+    "welcome"
+  ).textContent =
+    "Angemeldet als " +
+    current.username +
+    " · Rolle: " +
+    current.role;
+
+
+  document.getElementById(
+    "sUsers"
+  ).textContent =
+    users.length;
+
+
+  document.getElementById(
+    "sGroups"
+  ).textContent =
+    data.groups;
+
+
+  document.getElementById(
+    "sSeasons"
+  ).textContent =
+    data.seasons;
+
+
+  document.getElementById(
+    "sOnline"
+  ).textContent =
+    data.online;
+
+
+  document.getElementById(
+    "sRegistered"
+  ).textContent =
+    data.registered;
+
+
+  document.getElementById(
+    "groupsInput"
+  ).value =
+    data.groups;
+
+
+  document.getElementById(
+    "seasonsInput"
+  ).value =
+    data.seasons;
+
+
+  document.getElementById(
+    "onlineInput"
+  ).value =
+    data.online;
+
+
+  document.getElementById(
+    "registeredInput"
+  ).value =
+    data.registered;
+
+
+  /* STATISTIK RECHTE */
+
+  document.getElementById(
+    "statsPanel"
+  ).classList.toggle(
+    "locked",
+    !can("stats")
+  );
+
+
+  /* ACCOUNTS NUR OWNER */
+
+  document.getElementById(
+    "accountsPanel"
+  ).style.display =
+    current.role==="Owner"
+      ? "block"
+      : "none";
+
+
+  /* GRUPPEN */
+
+  document.getElementById(
+    "groupsPanel"
+  ).classList.toggle(
+    "locked",
+    !can("groups")
+  );
+
+
+  renderUsers();
+
+  renderGroups();
+
+}
+
+
+/* STATISTIKEN SPEICHERN */
+
+function saveStats(){
+
+  if(!can("stats")){
+
+    alert(
+      "Dafür brauchst du Manager- oder Owner-Rechte."
+    );
+
+    return;
+
+  }
+
+
+  data.groups =
+    Number(
+      document.getElementById(
+        "groupsInput"
+      ).value
+    ) || 0;
+
+
+  data.seasons =
+    Number(
+      document.getElementById(
+        "seasonsInput"
+      ).value
+    ) || 0;
+
+
+  data.online =
+    Number(
+      document.getElementById(
+        "onlineInput"
+      ).value
+    ) || 0;
+
+
+  data.registered =
+    Number(
+      document.getElementById(
+        "registeredInput"
+      ).value
+    ) || 0;
+
+
+  save();
+
+  render();
+
+}
+
+
+/* ACCOUNT HINZUFÜGEN */
+
+function addUser(){
+
+  if(current.role!=="Owner"){
+    return;
+  }
+
+
+  const username =
+    document
+      .getElementById("newUser")
+      .value
+      .trim();
+
+
+  const password =
+    document
+      .getElementById("newPass")
+      .value;
+
+
+  const role =
+    document
+      .getElementById("newRole")
+      .value;
+
+
+  if(!username || !password){
+
+    alert(
+      "Benutzername und Passwort eingeben."
+    );
+
+    return;
+
+  }
+
+
+  if(
+    users.some(
+      user =>
+        user.username === username
+    )
+  ){
+
+    alert(
+      "Benutzername existiert bereits."
+    );
+
+    return;
+
+  }
+
+
+  users.push({
+
+    username:username,
+
+    password:password,
+
+    role:role
+
+  });
+
+
+  save();
+
+
+  document.getElementById(
+    "newUser"
+  ).value="";
+
+
+  document.getElementById(
+    "newPass"
+  ).value="";
+
+
+  render();
+
+}
+
+
+/* ACCOUNT LÖSCHEN */
+
+function removeUser(name){
+
+  if(
+    current.role!=="Owner" ||
+    name==="owner"
+  ){
+
+    return;
+
+  }
+
+
+  users =
+    users.filter(
+      user =>
+        user.username !== name
+    );
+
+
+  save();
+
+  render();
+
+}
+
+
+/* ROLLE ÄNDERN */
+
+function changeRole(
+  name,
+  role
+){
+
+  if(current.role!=="Owner"){
+    return;
+  }
+
+
+  const user =
+    users.find(
+      user =>
+        user.username === name
+    );
+
+
+  if(user){
+
+    user.role=role;
+
+    save();
+
+    render();
+
+  }
+
+}
+
+
+/* BENUTZER LISTE */
+
+function renderUsers(){
+
+  document.getElementById(
+    "userList"
+  ).innerHTML =
+
+    users.map(
+
+      user => `
+
+      <div class="user">
+
+        <span>
+
+          <b>
+            ${escapeHtml(user.username)}
+          </b>
+
+          <span class="badge">
+            ${user.role}
+          </span>
+
+        </span>
+
+
+        ${
+          current.role==="Owner" &&
+          user.username!=="owner"
+
+          ?
+
+          `
+
+          <span>
+
+            <select
+              class="secondary"
+              onchange="
+                changeRole(
+                  '${encodeURIComponent(user.username)}',
+                  this.value
+                )
+              ">
+
+              <option
+                ${
+                  user.role==="Supporter"
+                  ? "selected"
+                  : ""
+                }>
+
+                Supporter
+
+              </option>
+
+
+              <option
+                ${
+                  user.role==="Manager"
+                  ? "selected"
+                  : ""
+                }>
+
+                Manager
+
+              </option>
+
+
+              <option
+                ${
+                  user.role==="Owner"
+                  ? "selected"
+                  : ""
+                }>
+
+                Owner
+
+              </option>
+
+            </select>
+
+
+            <button
+              class="danger"
+              onclick="
+                removeUser(
+                  decodeURIComponent(
+                    '${encodeURIComponent(user.username)}'
+                  )
+                )
+              ">
+
+              Löschen
+
+            </button>
+
+          </span>
+
+          `
+
+          :
+
+          ""
+
+        }
+
+      </div>
+
+      `
+
+    ).join("");
+
+}
+
+
+/* GRUPPE HINZUFÜGEN */
+
+function addGroup(){
+
+  if(!can("groups")){
+
+    alert(
+      "Dafür brauchst du mindestens Supporter-Rechte."
+    );
+
+    return;
+
+  }
+
+
+  const name =
+    document
+      .getElementById("groupName")
+      .value
+      .trim();
+
+
+  if(!name){
+    return;
+  }
+
+
+  data.groupNames.push(name);
+
+  data.groups =
+    data.groupNames.length;
+
+
+  save();
+
+
+  document.getElementById(
+    "groupName"
+  ).value="";
+
+
+  render();
+
+}
+
+
+/* GRUPPEN ANZEIGEN */
+
+function renderGroups(){
+
+  document.getElementById(
+    "groupList"
+  ).innerHTML =
+
+    data.groupNames.map(
+
+      (group,index) => `
+
+      <div class="user">
+
+        <span>
+          ${escapeHtml(group)}
+        </span>
+
+        ${
+          can("groups")
+
+          ?
+
+          `
+
+          <button
+            class="danger"
+            onclick="
+              deleteGroup(${index})
+            ">
+
+            Löschen
+
+          </button>
+
+          `
+
+          :
+
+          ""
+
+        }
+
+      </div>
+
+      `
+
+    ).join("")
+
+    ||
+
+    '<div class="notice">Noch keine Gruppen.</div>';
+
+}
+
+
+/* GRUPPE LÖSCHEN */
+
+function deleteGroup(index){
+
+  if(!can("groups")){
+    return;
+  }
+
+
+  data.groupNames.splice(
+    index,
+    1
+  );
+
+
+  data.groups =
+    data.groupNames.length;
+
+
+  save();
+
+  render();
+
+}
+
+
+/* SICHERER TEXT */
+
+function escapeHtml(text){
+
+  return text.replace(
+    /[&<>"']/g,
+
+    function(match){
+
+      return {
+
+        "&":"&amp;",
+        "<":"&lt;",
+        ">":"&gt;",
+        '"':"&quot;",
+        "'":"&#039;"
+
+      }[match];
+
+    }
+
+  );
+
+}
+
+</script>
 
 </body>
 </html>
-```
