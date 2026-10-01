@@ -2,17 +2,19 @@
 <html lang="de">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Yum Bot – In Entwicklung</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Yum Bot</title>
 
 <style>
 :root{
   --bg:#0f1117;
   --card:#191c26;
-  --muted:#aeb4c2;
-  --accent:#ff9d00;
-  --accent2:#ff6500;
   --border:#2a2f3c;
+  --text:#fff;
+  --muted:#aeb4c2;
+  --orange:#ff9d00;
+  --orange2:#ff6500;
 }
 
 *{
@@ -22,237 +24,378 @@
 body{
   margin:0;
   min-height:100vh;
-  font-family:Inter,system-ui,Arial,sans-serif;
+  font-family:Arial,Helvetica,sans-serif;
   background:
-    radial-gradient(circle at 15% 20%,#ff9d0020,transparent 30%),
-    radial-gradient(circle at 85% 80%,#ff650018,transparent 30%),
+    radial-gradient(circle at 10% 10%,#ff9d0020,transparent 30%),
+    radial-gradient(circle at 90% 90%,#ff650018,transparent 30%),
     var(--bg);
-  color:#fff;
+  color:var(--text);
 }
 
-/* STARTSEITE */
 
-main{
+/* =========================
+   STARTSEITE
+========================= */
+
+#landing{
   min-height:100vh;
-  display:grid;
-  place-items:center;
-  padding:24px;
+  padding:50px 20px 100px;
 }
 
-.card{
-  width:min(680px,100%);
-  padding:64px 36px;
+.hero{
+  max-width:850px;
+  margin:0 auto;
   text-align:center;
-  background:#191c26dd;
-  border:1px solid var(--border);
-  border-radius:28px;
-  box-shadow:0 25px 80px #0008;
-  backdrop-filter:blur(15px);
+  padding:60px 25px 35px;
 }
 
 .logo{
-  font-size:72px;
+  font-size:75px;
 }
 
-h1{
-  font-size:50px;
+.hero h1{
+  font-size:58px;
   margin:10px 0;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
+  background:linear-gradient(
+    90deg,
+    var(--orange),
+    var(--orange2)
+  );
   -webkit-background-clip:text;
   color:transparent;
 }
 
-.subtitle{
-  font-size:24px;
-  font-weight:700;
+.hero h2{
+  font-size:26px;
+  margin:0 0 15px;
 }
 
-p{
+.hero p{
   color:var(--muted);
-  line-height:1.6;
   font-size:17px;
+  line-height:1.6;
 }
 
-.status{
-  display:inline-flex;
-  gap:9px;
-  align-items:center;
-  padding:11px 18px;
-  border:1px solid #ff9d0040;
-  background:#ff9d0015;
+
+/* =========================
+   STATISTIKEN
+========================= */
+
+.public-stats{
+  max-width:1100px;
+  margin:0 auto;
+}
+
+.public-title{
+  text-align:center;
+  font-size:28px;
+  margin:20px 0;
+}
+
+.public-grid{
+  display:grid;
+  grid-template-columns:
+    repeat(auto-fit,minmax(170px,1fr));
+  gap:15px;
+}
+
+.public-stat{
+  background:#191c26dd;
+  border:1px solid var(--border);
+  border-radius:18px;
+  padding:23px 15px;
+  text-align:center;
+  box-shadow:0 10px 35px #0005;
+}
+
+.public-stat .icon{
+  font-size:30px;
+}
+
+.public-stat small{
+  display:block;
+  color:var(--muted);
+  margin-top:7px;
+}
+
+.public-stat strong{
+  display:block;
+  font-size:32px;
+  margin-top:6px;
   color:#ffb52e;
+}
+
+
+/* =========================
+   GRUPPEN
+========================= */
+
+.groups-box{
+  margin-top:30px;
+  background:#191c26dd;
+  border:1px solid var(--border);
+  border-radius:20px;
+  padding:25px;
+  box-shadow:0 10px 35px #0005;
+}
+
+.groups-box h2{
+  text-align:center;
+  margin-top:0;
+}
+
+.group-list{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:10px;
+}
+
+.group{
+  padding:10px 17px;
   border-radius:999px;
-  font-weight:700;
+  background:#ff9d0015;
+  border:1px solid #ff9d0050;
+  color:#ffbd52;
+  font-weight:bold;
 }
 
-.dot{
-  width:9px;
-  height:9px;
-  background:#ffb52e;
-  border-radius:50%;
-  animation:pulse 1.5s infinite;
+.no-groups{
+  text-align:center;
+  color:var(--muted);
 }
 
-/* TEAM LOGIN BUTTON */
+
+/* =========================
+   TEAM LOGIN
+========================= */
 
 .team-login{
   position:fixed;
   right:18px;
-  bottom:16px;
+  bottom:18px;
+  z-index:50;
+
   border:0;
-  background:#fff;
+  padding:12px 18px;
+
+  background:white;
   color:#111;
-  padding:10px 15px;
+
   border-radius:12px;
-  font-weight:700;
+
+  font-weight:bold;
   cursor:pointer;
-  box-shadow:0 8px 25px #0005;
+
+  box-shadow:0 8px 25px #0007;
 }
 
 .team-login:hover{
-  transform:translateY(-1px);
+  transform:translateY(-2px);
 }
 
-/* LOGIN */
+
+/* =========================
+   LOGIN
+========================= */
 
 .overlay{
   position:fixed;
   inset:0;
-  background:#0009;
+  z-index:100;
+
   display:none;
   align-items:center;
   justify-content:center;
+
+  background:#000b;
   padding:20px;
-  z-index:10;
 }
 
-.modal{
+.login-box{
   width:min(430px,100%);
-  background:#191c26;
+
+  background:var(--card);
+
   border:1px solid var(--border);
-  border-radius:22px;
-  padding:28px;
-  box-shadow:0 30px 100px #0009;
+  border-radius:20px;
+
+  padding:30px;
+
+  box-shadow:0 30px 100px #000;
 }
 
-.modal h2{
+.login-box h2{
   margin-top:0;
 }
 
 .close{
   float:right;
+
   background:none;
   border:0;
+
   color:#aaa;
-  font-size:24px;
+
+  font-size:25px;
   cursor:pointer;
 }
 
 .input{
   width:100%;
+
   padding:13px;
+
   margin:7px 0 12px;
-  border-radius:10px;
-  border:1px solid var(--border);
+
   background:#0f1117;
   color:white;
+
+  border:1px solid var(--border);
+  border-radius:10px;
+
   font-size:15px;
 }
 
-.btn{
+.button{
   width:100%;
-  padding:12px;
+
+  padding:13px;
+
   border:0;
   border-radius:10px;
-  background:linear-gradient(90deg,var(--accent),var(--accent2));
-  font-weight:800;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--orange),
+      var(--orange2)
+    );
+
+  color:white;
+
+  font-weight:bold;
+
   cursor:pointer;
 }
 
 .error{
-  color:#ff8585;
   min-height:20px;
+  color:#ff7777;
   font-size:14px;
 }
 
-.hint{
-  font-size:12px;
-  color:#747c8d;
-  margin-top:15px;
-}
 
-/* DASHBOARD */
+/* =========================
+   DASHBOARD
+========================= */
 
-.dashboard{
+#dashboard{
   display:none;
+
   position:fixed;
   inset:0;
+
+  z-index:90;
+
   overflow:auto;
+
   background:var(--bg);
-  z-index:20;
-  padding:24px;
+
+  padding:25px;
 }
 
-.dash-wrap{
+.dashboard-inner{
   max-width:1200px;
   margin:auto;
 }
 
-.top{
+.dashboard-header{
   display:flex;
   justify-content:space-between;
-  gap:15px;
   align-items:center;
+  gap:15px;
   flex-wrap:wrap;
 }
 
-.top h1{
-  font-size:34px;
+.dashboard-header h1{
   margin:0;
+
+  background:
+    linear-gradient(
+      90deg,
+      var(--orange),
+      var(--orange2)
+    );
+
+  -webkit-background-clip:text;
+  color:transparent;
 }
 
 .logout{
+  padding:10px 15px;
+
   background:#252a35;
-  color:#fff;
+  color:white;
+
   border:1px solid var(--border);
-  padding:10px 14px;
   border-radius:10px;
+
   cursor:pointer;
 }
 
-.grid{
+
+/* Dashboard Stats */
+
+.dashboard-grid{
   display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(170px,1fr));
-  gap:14px;
-  margin:24px 0;
+
+  grid-template-columns:
+    repeat(auto-fit,minmax(170px,1fr));
+
+  gap:15px;
+
+  margin:25px 0;
 }
 
-.stat{
-  background:#191c26;
+.dashboard-stat{
+  background:var(--card);
+
   border:1px solid var(--border);
+
+  border-radius:15px;
+
   padding:20px;
-  border-radius:16px;
 }
 
-.stat small{
+.dashboard-stat small{
   color:var(--muted);
 }
 
-.stat b{
+.dashboard-stat strong{
   display:block;
+
   font-size:30px;
+
   margin-top:7px;
 }
 
+
+/* Panels */
+
 .panel{
-  background:#191c26;
+  background:var(--card);
+
   border:1px solid var(--border);
+
   border-radius:16px;
+
   padding:20px;
-  margin:14px 0;
+
+  margin:15px 0;
 }
 
-.panel h3{
+.panel h2{
   margin-top:0;
 }
 
@@ -260,87 +403,81 @@ p{
   display:flex;
   gap:10px;
   flex-wrap:wrap;
-  margin-bottom:10px;
 }
 
 .row .input{
-  margin:0;
   flex:1;
   min-width:150px;
 }
 
 .secondary{
+  padding:11px 15px;
+
   background:#252a35;
-  color:#fff;
+  color:white;
+
   border:1px solid var(--border);
-  padding:10px 14px;
+
   border-radius:10px;
+
   cursor:pointer;
 }
 
 .danger{
-  background:#3a2024;
-  color:#ff9b9b;
-  border:1px solid #6b2c33;
-  padding:10px 14px;
-  border-radius:10px;
+  padding:8px 12px;
+
+  background:#401f25;
+  color:#ff9999;
+
+  border:1px solid #71323a;
+
+  border-radius:8px;
+
   cursor:pointer;
 }
 
 .user{
   display:flex;
-  align-items:center;
-  justify-content:space-between;
-  border-top:1px solid var(--border);
-  padding:12px 0;
-  gap:10px;
-}
 
-.user:first-of-type{
-  border-top:0;
+  justify-content:space-between;
+  align-items:center;
+
+  gap:10px;
+
+  padding:13px 0;
+
+  border-top:1px solid var(--border);
 }
 
 .badge{
-  padding:4px 8px;
+  padding:4px 9px;
+
   border-radius:999px;
+
   background:#ffffff12;
+
   color:#ffbd52;
+
   font-size:12px;
 }
 
-.notice{
-  font-size:13px;
-  color:#aeb4c2;
-  background:#10131a;
-  border:1px solid var(--border);
-  padding:12px;
-  border-radius:10px;
-}
 
-.locked{
-  opacity:.55;
-}
+/* Mobile */
 
-@keyframes pulse{
-  50%{
-    opacity:.4;
-    transform:scale(.8);
-  }
-}
+@media(max-width:600px){
 
-@media(max-width:520px){
-
-  .card{
-    padding:45px 22px;
-  }
-
-  h1{
-    font-size:40px;
+  .hero h1{
+    font-size:43px;
   }
 
   .logo{
-    font-size:58px;
+    font-size:60px;
   }
+
+  #landing{
+    padding-top:20px;
+  }
+
 }
 </style>
 </head>
@@ -348,11 +485,14 @@ p{
 
 <body>
 
-<!-- STARTSEITE -->
 
-<main id="landing">
+<!-- ==================================================
+     STARTSEITE
+================================================== -->
 
-  <section class="card">
+<div id="landing">
+
+  <section class="hero">
 
     <div class="logo">
       🍔
@@ -362,26 +502,142 @@ p{
       Yum Bot
     </h1>
 
-    <div class="subtitle">
-      In Entwicklung
-    </div>
+    <h2>
+      Willkommen bei Yum Bot
+    </h2>
 
     <p>
-      Yum Bot befindet sich momentan in der Entwicklung.
-      Wir arbeiten daran, etwas Leckeres für euch zu bauen.
+      Yum Bot befindet sich aktuell in der Entwicklung.
+      Hier findest du Informationen, Statistiken und
+      unsere Gruppen.
     </p>
 
-    <div class="status">
-      <span class="dot"></span>
-      Entwicklung läuft
+  </section>
+
+
+  <!-- STATISTIKEN -->
+
+  <section class="public-stats">
+
+    <h2 class="public-title">
+      Statistiken
+    </h2>
+
+    <div class="public-grid">
+
+
+      <div class="public-stat">
+
+        <div class="icon">
+          👥
+        </div>
+
+        <small>
+          Benutzer
+        </small>
+
+        <strong id="publicUsers">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="public-stat">
+
+        <div class="icon">
+          🎮
+        </div>
+
+        <small>
+          Seasons
+        </small>
+
+        <strong id="publicSeasons">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="public-stat">
+
+        <div class="icon">
+          👨‍👩‍👧‍👦
+        </div>
+
+        <small>
+          Gruppen
+        </small>
+
+        <strong id="publicGroups">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="public-stat">
+
+        <div class="icon">
+          🟢
+        </div>
+
+        <small>
+          Online
+        </small>
+
+        <strong id="publicOnline">
+          0
+        </strong>
+
+      </div>
+
+
+      <div class="public-stat">
+
+        <div class="icon">
+          📋
+        </div>
+
+        <small>
+          Registriert
+        </small>
+
+        <strong id="publicRegistered">
+          0
+        </strong>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- GRUPPEN -->
+
+    <div class="groups-box">
+
+      <h2>
+        Gruppen
+      </h2>
+
+      <div
+        class="group-list"
+        id="publicGroupList">
+
+      </div>
+
     </div>
 
   </section>
 
-</main>
+</div>
 
 
-<!-- TEAM LOGIN BUTTON -->
+<!-- ==================================================
+     TEAM LOGIN BUTTON
+================================================== -->
 
 <button
   class="team-login"
@@ -392,13 +648,15 @@ p{
 </button>
 
 
-<!-- LOGIN FENSTER -->
+<!-- ==================================================
+     LOGIN
+================================================== -->
 
 <div
   class="overlay"
   id="loginOverlay">
 
-  <div class="modal">
+  <div class="login-box">
 
     <button
       class="close"
@@ -413,21 +671,19 @@ p{
     </h2>
 
     <p>
-      Nur für Mitglieder des Yum-Bot-Teams.
+      Melde dich mit deinem Team-Account an.
     </p>
 
     <input
       class="input"
       id="loginUser"
-      placeholder="Benutzername"
-      autocomplete="username">
+      placeholder="Benutzername">
 
     <input
       class="input"
       id="loginPass"
       type="password"
-      placeholder="Passwort"
-      autocomplete="current-password">
+      placeholder="Passwort">
 
     <div
       class="error"
@@ -435,37 +691,34 @@ p{
     </div>
 
     <button
-      class="btn"
+      class="button"
       onclick="login()">
 
       Anmelden
 
     </button>
 
-    <div class="hint">
+    <p style="font-size:12px;color:#777">
 
-      Demo-Zugang:
-      owner / yumdemo
+      Demo: owner / yumdemo
 
-    </div>
+    </p>
 
   </div>
 
 </div>
 
 
-<!-- DASHBOARD -->
+<!-- ==================================================
+     DASHBOARD
+================================================== -->
 
-<section
-  class="dashboard"
-  id="dashboard">
+<div id="dashboard">
 
-  <div class="dash-wrap">
+  <div class="dashboard-inner">
 
 
-    <!-- HEADER -->
-
-    <div class="top">
+    <div class="dashboard-header">
 
       <h1>
         🍔 Yum Bot Team
@@ -482,108 +735,94 @@ p{
     </div>
 
 
-    <div
-      id="welcome"
-      class="notice"
-      style="margin-top:18px">
-    </div>
+    <p id="welcome"></p>
 
 
-    <!-- STATISTIKEN -->
+    <!-- DASHBOARD STATISTIKEN -->
 
-    <div class="grid">
-
-      <div class="stat">
-
-        <small>
-          Statistiken
-        </small>
-
-        <b id="sStats">
-          1
-        </b>
-
-      </div>
+    <div class="dashboard-grid">
 
 
-      <div class="stat">
+      <div class="dashboard-stat">
 
         <small>
           Benutzer
         </small>
 
-        <b id="sUsers">
+        <strong id="dashUsers">
           0
-        </b>
+        </strong>
 
       </div>
 
 
-      <div class="stat">
+      <div class="dashboard-stat">
 
         <small>
           Seasons
         </small>
 
-        <b id="sSeasons">
-          1
-        </b>
+        <strong id="dashSeasons">
+          0
+        </strong>
 
       </div>
 
 
-      <div class="stat">
+      <div class="dashboard-stat">
 
         <small>
           Gruppen
         </small>
 
-        <b id="sGroups">
+        <strong id="dashGroups">
           0
-        </b>
+        </strong>
 
       </div>
 
 
-      <div class="stat">
+      <div class="dashboard-stat">
 
         <small>
           Online
         </small>
 
-        <b id="sOnline">
-          1
-        </b>
+        <strong id="dashOnline">
+          0
+        </strong>
 
       </div>
 
 
-      <div class="stat">
+      <div class="dashboard-stat">
 
         <small>
           Registriert
         </small>
 
-        <b id="sRegistered">
+        <strong id="dashRegistered">
           0
-        </b>
+        </strong>
 
       </div>
+
 
     </div>
 
 
-    <!-- STATISTIKEN BEARBEITEN -->
+    <!-- STATISTIKEN ÄNDERN -->
 
     <div
       class="panel"
       id="statsPanel">
 
-      <h3>
-        Website-Statistiken
-      </h3>
+      <h2>
+        Statistiken bearbeiten
+      </h2>
 
       <div class="row">
+
 
         <input
           class="input"
@@ -592,12 +831,14 @@ p{
           min="0"
           placeholder="Gruppen">
 
+
         <input
           class="input"
           id="seasonsInput"
           type="number"
           min="0"
           placeholder="Seasons">
+
 
         <input
           class="input"
@@ -606,12 +847,14 @@ p{
           min="0"
           placeholder="Online">
 
+
         <input
           class="input"
           id="registeredInput"
           type="number"
           min="0"
           placeholder="Registriert">
+
 
         <button
           class="secondary"
@@ -632,27 +875,18 @@ p{
       class="panel"
       id="accountsPanel">
 
-      <h3>
+      <h2>
         Team-Accounts
-      </h3>
+      </h2>
 
-      <div class="notice">
+      <div class="row">
 
-        Owner kann Accounts und Rollen verwalten.
-        Manager kann Inhalte bearbeiten.
-        Supporter kann Gruppen verwalten.
-
-      </div>
-
-
-      <div
-        class="row"
-        style="margin-top:12px">
 
         <input
           class="input"
           id="newUser"
           placeholder="Benutzername">
+
 
         <input
           class="input"
@@ -691,21 +925,18 @@ p{
       </div>
 
 
-      <div id="userList">
-      </div>
+      <div id="userList"></div>
 
     </div>
 
 
-    <!-- GRUPPEN -->
+    <!-- GRUPPEN VERWALTEN -->
 
-    <div
-      class="panel"
-      id="groupsPanel">
+    <div class="panel">
 
-      <h3>
-        Gruppen
-      </h3>
+      <h2>
+        Gruppen verwalten
+      </h2>
 
       <div class="row">
 
@@ -724,56 +955,53 @@ p{
 
       </div>
 
-
-      <div id="groupList">
-      </div>
+      <div id="groupList"></div>
 
     </div>
 
 
-    <!-- ROLLEN -->
+    <!-- RECHTE -->
 
     <div class="panel">
 
-      <h3>
+      <h2>
         Rollen & Rechte
-      </h3>
+      </h2>
 
-      <div class="notice">
+      <p>
+        👑 <b>Owner</b> –
+        Kann alles verwalten und Accounts erstellen.
+      </p>
 
-        <b>Owner</b>
-        – Accounts, Rollen und alle Inhalte
+      <p>
+        🛠️ <b>Manager</b> –
+        Kann Statistiken und Gruppen verwalten.
+      </p>
 
-        <br><br>
-
-        <b>Manager</b>
-        – Inhalte, Statistiken und Gruppen
-
-        <br><br>
-
-        <b>Supporter</b>
-        – Gruppen und ausgewählte Inhalte
-
-      </div>
+      <p>
+        🆘 <b>Supporter</b> –
+        Kann Gruppen verwalten.
+      </p>
 
     </div>
 
+
   </div>
 
-</section>
+</div>
 
 
 <script>
 
+
+/* ==================================================
+   DATEN
+================================================== */
+
+
 /*
-====================================================
-YUM BOT
-TEAM SYSTEM
-====================================================
+   Demo-Accounts
 */
-
-
-/* DEMO ACCOUNTS */
 
 const DEFAULT_USERS = [
 
@@ -800,18 +1028,14 @@ const DEFAULT_USERS = [
 
 let users =
   JSON.parse(
-    localStorage.getItem("yum_users") || "null"
-  )
-  || DEFAULT_USERS;
+    localStorage.getItem("yum_users")
+  ) || DEFAULT_USERS;
 
 
 let data =
   JSON.parse(
-    localStorage.getItem("yum_data") || "null"
-  )
-  || {
-
-    groups:0,
+    localStorage.getItem("yum_data")
+  ) || {
 
     seasons:1,
 
@@ -824,12 +1048,14 @@ let data =
   };
 
 
-let current = null;
+let currentUser = null;
 
 
-/* SPEICHERN */
+/* ==================================================
+   SPEICHERN
+================================================== */
 
-function save(){
+function saveData(){
 
   localStorage.setItem(
     "yum_users",
@@ -844,7 +1070,69 @@ function save(){
 }
 
 
-/* LOGIN ÖFFNEN */
+/* ==================================================
+   STARTSEITE
+================================================== */
+
+function renderPublic(){
+
+  document.getElementById(
+    "publicUsers"
+  ).textContent = users.length;
+
+
+  document.getElementById(
+    "publicSeasons"
+  ).textContent = data.seasons;
+
+
+  document.getElementById(
+    "publicGroups"
+  ).textContent =
+    data.groupNames.length;
+
+
+  document.getElementById(
+    "publicOnline"
+  ).textContent = data.online;
+
+
+  document.getElementById(
+    "publicRegistered"
+  ).textContent =
+    data.registered;
+
+
+  const list =
+    document.getElementById(
+      "publicGroupList"
+    );
+
+
+  if(data.groupNames.length === 0){
+
+    list.innerHTML =
+      '<div class="no-groups">Noch keine Gruppen vorhanden.</div>';
+
+    return;
+
+  }
+
+
+  list.innerHTML =
+    data.groupNames.map(
+      group =>
+        `<div class="group">
+          ${escapeHtml(group)}
+        </div>`
+    ).join("");
+
+}
+
+
+/* ==================================================
+   LOGIN
+================================================== */
 
 function openLogin(){
 
@@ -852,14 +1140,8 @@ function openLogin(){
     "loginOverlay"
   ).style.display="flex";
 
-  document.getElementById(
-    "loginUser"
-  ).focus();
-
 }
 
-
-/* LOGIN SCHLIESSEN */
 
 function closeLogin(){
 
@@ -874,31 +1156,29 @@ function closeLogin(){
 }
 
 
-/* LOGIN */
-
 function login(){
 
   const username =
-    document
-      .getElementById("loginUser")
-      .value
-      .trim();
+    document.getElementById(
+      "loginUser"
+    ).value.trim();
+
 
   const password =
-    document
-      .getElementById("loginPass")
-      .value;
+    document.getElementById(
+      "loginPass"
+    ).value;
 
 
-  const found =
+  const user =
     users.find(
-      user =>
-        user.username === username &&
-        user.password === password
+      x =>
+        x.username === username &&
+        x.password === password
     );
 
 
-  if(!found){
+  if(!user){
 
     document.getElementById(
       "loginError"
@@ -910,7 +1190,8 @@ function login(){
   }
 
 
-  current = found;
+  currentUser = user;
+
 
   closeLogin();
 
@@ -930,16 +1211,18 @@ function login(){
   ).style.display="block";
 
 
-  render();
+  renderDashboard();
 
 }
 
 
-/* LOGOUT */
+/* ==================================================
+   LOGOUT
+================================================== */
 
 function logout(){
 
-  current=null;
+  currentUser=null;
 
 
   document.getElementById(
@@ -949,37 +1232,38 @@ function logout(){
 
   document.getElementById(
     "landing"
-  ).style.display="grid";
+  ).style.display="block";
 
 
   document.querySelector(
     ".team-login"
   ).style.display="block";
 
+
+  renderPublic();
+
 }
 
 
-/* RECHTE */
+/* ==================================================
+   RECHTE
+================================================== */
 
 function can(permission){
 
-  if(!current){
+  if(!currentUser){
     return false;
   }
 
 
-  /* OWNER */
-
-  if(current.role==="Owner"){
+  if(currentUser.role==="Owner"){
     return true;
   }
 
 
-  /* MANAGER */
-
   if(
-    current.role==="Manager" &&
-    permission!=="owner"
+    currentUser.role==="Manager" &&
+    permission!=="accounts"
   ){
 
     return true;
@@ -987,10 +1271,8 @@ function can(permission){
   }
 
 
-  /* SUPPORTER */
-
   if(
-    current.role==="Supporter" &&
+    currentUser.role==="Supporter" &&
     permission==="groups"
   ){
 
@@ -1004,45 +1286,47 @@ function can(permission){
 }
 
 
-/* DASHBOARD RENDERN */
+/* ==================================================
+   DASHBOARD
+================================================== */
 
-function render(){
+function renderDashboard(){
 
   document.getElementById(
     "welcome"
   ).textContent =
     "Angemeldet als " +
-    current.username +
-    " · Rolle: " +
-    current.role;
+    currentUser.username +
+    " · " +
+    currentUser.role;
 
 
   document.getElementById(
-    "sUsers"
+    "dashUsers"
   ).textContent =
     users.length;
 
 
   document.getElementById(
-    "sGroups"
-  ).textContent =
-    data.groups;
-
-
-  document.getElementById(
-    "sSeasons"
+    "dashSeasons"
   ).textContent =
     data.seasons;
 
 
   document.getElementById(
-    "sOnline"
+    "dashGroups"
+  ).textContent =
+    data.groupNames.length;
+
+
+  document.getElementById(
+    "dashOnline"
   ).textContent =
     data.online;
 
 
   document.getElementById(
-    "sRegistered"
+    "dashRegistered"
   ).textContent =
     data.registered;
 
@@ -1050,7 +1334,7 @@ function render(){
   document.getElementById(
     "groupsInput"
   ).value =
-    data.groups;
+    data.groupNames.length;
 
 
   document.getElementById(
@@ -1071,34 +1355,16 @@ function render(){
     data.registered;
 
 
-  /* STATISTIK RECHTE */
-
-  document.getElementById(
-    "statsPanel"
-  ).classList.toggle(
-    "locked",
-    !can("stats")
-  );
-
-
-  /* ACCOUNTS NUR OWNER */
+  /*
+     Accounts nur Owner
+  */
 
   document.getElementById(
     "accountsPanel"
   ).style.display =
-    current.role==="Owner"
+    currentUser.role==="Owner"
       ? "block"
       : "none";
-
-
-  /* GRUPPEN */
-
-  document.getElementById(
-    "groupsPanel"
-  ).classList.toggle(
-    "locked",
-    !can("groups")
-  );
 
 
   renderUsers();
@@ -1108,27 +1374,21 @@ function render(){
 }
 
 
-/* STATISTIKEN SPEICHERN */
+/* ==================================================
+   STATISTIKEN SPEICHERN
+================================================== */
 
 function saveStats(){
 
   if(!can("stats")){
 
     alert(
-      "Dafür brauchst du Manager- oder Owner-Rechte."
+      "Du hast dafür keine Rechte."
     );
 
     return;
 
   }
-
-
-  data.groups =
-    Number(
-      document.getElementById(
-        "groupsInput"
-      ).value
-    ) || 0;
 
 
   data.seasons =
@@ -1155,45 +1415,48 @@ function saveStats(){
     ) || 0;
 
 
-  save();
+  saveData();
 
-  render();
+  renderDashboard();
+
+  renderPublic();
 
 }
 
 
-/* ACCOUNT HINZUFÜGEN */
+/* ==================================================
+   ACCOUNT HINZUFÜGEN
+================================================== */
 
 function addUser(){
 
-  if(current.role!=="Owner"){
+  if(currentUser.role!=="Owner"){
     return;
   }
 
 
   const username =
-    document
-      .getElementById("newUser")
-      .value
-      .trim();
+    document.getElementById(
+      "newUser"
+    ).value.trim();
 
 
   const password =
-    document
-      .getElementById("newPass")
-      .value;
+    document.getElementById(
+      "newPass"
+    ).value;
 
 
   const role =
-    document
-      .getElementById("newRole")
-      .value;
+    document.getElementById(
+      "newRole"
+    ).value;
 
 
   if(!username || !password){
 
     alert(
-      "Benutzername und Passwort eingeben."
+      "Bitte Benutzername und Passwort eingeben."
     );
 
     return;
@@ -1203,13 +1466,12 @@ function addUser(){
 
   if(
     users.some(
-      user =>
-        user.username === username
+      x => x.username===username
     )
   ){
 
     alert(
-      "Benutzername existiert bereits."
+      "Dieser Benutzername existiert bereits."
     );
 
     return;
@@ -1228,7 +1490,11 @@ function addUser(){
   });
 
 
-  save();
+  saveData();
+
+  renderDashboard();
+
+  renderPublic();
 
 
   document.getElementById(
@@ -1240,20 +1506,25 @@ function addUser(){
     "newPass"
   ).value="";
 
-
-  render();
-
 }
 
 
-/* ACCOUNT LÖSCHEN */
+/* ==================================================
+   ACCOUNT LÖSCHEN
+================================================== */
 
-function removeUser(name){
+function deleteUser(username){
 
-  if(
-    current.role!=="Owner" ||
-    name==="owner"
-  ){
+  if(currentUser.role!=="Owner"){
+    return;
+  }
+
+
+  if(username==="owner"){
+
+    alert(
+      "Der Haupt-Owner kann nicht gelöscht werden."
+    );
 
     return;
 
@@ -1262,34 +1533,36 @@ function removeUser(name){
 
   users =
     users.filter(
-      user =>
-        user.username !== name
+      x => x.username!==username
     );
 
 
-  save();
+  saveData();
 
-  render();
+  renderDashboard();
+
+  renderPublic();
 
 }
 
 
-/* ROLLE ÄNDERN */
+/* ==================================================
+   ROLLE ÄNDERN
+================================================== */
 
 function changeRole(
-  name,
+  username,
   role
 ){
 
-  if(current.role!=="Owner"){
+  if(currentUser.role!=="Owner"){
     return;
   }
 
 
   const user =
     users.find(
-      user =>
-        user.username === name
+      x => x.username===username
     );
 
 
@@ -1297,25 +1570,29 @@ function changeRole(
 
     user.role=role;
 
-    save();
+    saveData();
 
-    render();
+    renderDashboard();
 
   }
 
 }
 
 
-/* BENUTZER LISTE */
+/* ==================================================
+   BENUTZER ANZEIGEN
+================================================== */
 
 function renderUsers(){
 
-  document.getElementById(
-    "userList"
-  ).innerHTML =
+  const list =
+    document.getElementById(
+      "userList"
+    );
 
+
+  list.innerHTML =
     users.map(
-
       user => `
 
       <div class="user">
@@ -1334,7 +1611,7 @@ function renderUsers(){
 
 
         ${
-          current.role==="Owner" &&
+          currentUser.role==="Owner" &&
           user.username!=="owner"
 
           ?
@@ -1363,7 +1640,6 @@ function renderUsers(){
 
               </option>
 
-
               <option
                 ${
                   user.role==="Manager"
@@ -1374,7 +1650,6 @@ function renderUsers(){
                 Manager
 
               </option>
-
 
               <option
                 ${
@@ -1393,7 +1668,7 @@ function renderUsers(){
             <button
               class="danger"
               onclick="
-                removeUser(
+                deleteUser(
                   decodeURIComponent(
                     '${encodeURIComponent(user.username)}'
                   )
@@ -1417,20 +1692,21 @@ function renderUsers(){
       </div>
 
       `
-
     ).join("");
 
 }
 
 
-/* GRUPPE HINZUFÜGEN */
+/* ==================================================
+   GRUPPE HINZUFÜGEN
+================================================== */
 
 function addGroup(){
 
   if(!can("groups")){
 
     alert(
-      "Dafür brauchst du mindestens Supporter-Rechte."
+      "Du hast dafür keine Rechte."
     );
 
     return;
@@ -1439,10 +1715,9 @@ function addGroup(){
 
 
   const name =
-    document
-      .getElementById("groupName")
-      .value
-      .trim();
+    document.getElementById(
+      "groupName"
+    ).value.trim();
 
 
   if(!name){
@@ -1452,33 +1727,45 @@ function addGroup(){
 
   data.groupNames.push(name);
 
-  data.groups =
-    data.groupNames.length;
 
+  saveData();
 
-  save();
+  renderDashboard();
+
+  renderPublic();
 
 
   document.getElementById(
     "groupName"
   ).value="";
 
-
-  render();
-
 }
 
 
-/* GRUPPEN ANZEIGEN */
+/* ==================================================
+   GRUPPEN ANZEIGEN
+================================================== */
 
 function renderGroups(){
 
-  document.getElementById(
-    "groupList"
-  ).innerHTML =
+  const list =
+    document.getElementById(
+      "groupList"
+    );
 
+
+  if(data.groupNames.length===0){
+
+    list.innerHTML =
+      '<p style="color:#999">Keine Gruppen vorhanden.</p>';
+
+    return;
+
+  }
+
+
+  list.innerHTML =
     data.groupNames.map(
-
       (group,index) => `
 
       <div class="user">
@@ -1515,17 +1802,14 @@ function renderGroups(){
       </div>
 
       `
-
-    ).join("")
-
-    ||
-
-    '<div class="notice">Noch keine Gruppen.</div>';
+    ).join("");
 
 }
 
 
-/* GRUPPE LÖSCHEN */
+/* ==================================================
+   GRUPPE LÖSCHEN
+================================================== */
 
 function deleteGroup(index){
 
@@ -1540,25 +1824,25 @@ function deleteGroup(index){
   );
 
 
-  data.groups =
-    data.groupNames.length;
+  saveData();
 
+  renderDashboard();
 
-  save();
-
-  render();
+  renderPublic();
 
 }
 
 
-/* SICHERER TEXT */
+/* ==================================================
+   SICHERER TEXT
+================================================== */
 
 function escapeHtml(text){
 
-  return text.replace(
+  return String(text).replace(
     /[&<>"']/g,
 
-    function(match){
+    function(char){
 
       return {
 
@@ -1568,13 +1852,20 @@ function escapeHtml(text){
         '"':"&quot;",
         "'":"&#039;"
 
-      }[match];
+      }[char];
 
     }
 
   );
 
 }
+
+
+/* ==================================================
+   START
+================================================== */
+
+renderPublic();
 
 </script>
 
